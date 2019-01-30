@@ -12,17 +12,34 @@ public class NEWHexTileMap : MonoBehaviour
     
     public GameObject HexPrefab;
 
+    // Create meshes to hold more detailed tile information 
+    public Mesh MeshWater;
+    public Mesh MeshFlat;
+    public Mesh MeshHill;
+    public Mesh MeshMountain;
+    
+
     // Create an array of different terrain materials 
-    public Material[] HexMaterials;
+    //public Material[] HexMaterials;
+
+    // Create specific meshes for more detailed map generation
+    public Material MatWater;
+    public Material MatDesert;
+    public Material MatGrassland;
+    public Material MatMountain;
+    public Material MatPlains;
 
     public int numRows = 20;
     public int numColumns = 40; 
 
     
-    void GenerateMap()
+    public virtual void GenerateMap()
     {
         for (int column = 0; column < numColumns; column++)
         {
+            
+            // Generate a map filled with ocean
+            
             for (int row = 0; row < numRows; row++)
             {
                 // Instantiate a Hex
@@ -36,9 +53,13 @@ public class NEWHexTileMap : MonoBehaviour
                 hexGO.GetComponent<HexComponent>().Hex = h;
                 hexGO.GetComponent<HexComponent>().NEWHexTileMap = this;
 
-                // Creates terrain based off of a random selection of materials from the hex materials array
+                hexGO.GetComponentInChildren<TextMesh>().text = string.Format("{0},{1}", column, row);
+
                 MeshRenderer mr = hexGO.GetComponentInChildren<MeshRenderer>();
-                mr.material = HexMaterials[Random.Range(0, HexMaterials.Length)];
+                mr.material = MatWater;
+                
+                MeshFilter mf = hexGO.GetComponentInChildren<MeshFilter>();
+                mf.mesh = MeshWater;
             }
         }
         
