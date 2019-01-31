@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96102444-5f61-434f-84d3-d69274ad0ab0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Expedition_Prototype/.idea/contentModel.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Expedition_Prototype/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Expedition_Prototype/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Expedition_Prototype/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Expedition_Prototype/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Hex.max" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Hex.max.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Hexagon.max" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Hexagon.max.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/HexPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/HexPrefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NEWHexTileMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NEWHexTileMap.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Expedition_Prototype/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Expedition_Prototype/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,8 +14,10 @@
     <session id="184751512">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.29" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.46" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -52,7 +43,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/CameraMotion.cs">
           <provider selected="true" editor-type-id="text-editor">
@@ -75,7 +66,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Hex.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-320">
+            <state>
               <folding>
                 <marker date="1548826185754" expanded="false" signature="6:138" ph="..." />
                 <marker date="1548826185754" expanded="true" signature="140:347" ph="/// The Hex class defines the fgrid position, world space position, size, ... " />
@@ -121,17 +112,16 @@
             <state>
               <folding>
                 <marker date="1548802377535" expanded="false" signature="6:78" ph="..." />
-                <marker date="1548802377535" expanded="true" signature="121:374" ph="{...}" />
                 <marker date="1548802377535" expanded="true" signature="221:372" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/NEWHexTileMap.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="543">
+            <state relative-caret-position="896">
               <caret line="58" column="39" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
               <folding>
                 <marker date="1548886307463" expanded="false" signature="6:78" ph="..." />
@@ -146,11 +136,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/HexMapContinent.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+            <state>
               <folding>
                 <marker date="1548886092565" expanded="false" signature="6:78" ph="..." />
                 <marker date="1548886092565" expanded="true" signature="124:272" ph="{...}" />
@@ -259,12 +248,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1548881236222</updated>
-      <workItem from="1548881248528" duration="4626000" />
+      <workItem from="1548881248528" duration="5236000" />
+      <workItem from="1548973443317" duration="598000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4626000" />
+    <option name="totallyTimeSpent" value="5834000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -277,18 +267,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="175" y="89" width="1103" height="926" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.24928091" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24928091" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="NuGet" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Unit Tests" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -296,12 +278,19 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Errors In Solution" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Unit Tests Coverage" />
+      <window_info anchor="bottom" id="NuGet" order="7" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Unit Tests" order="11" />
+      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Errors In Solution" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Unit Tests Coverage" order="5" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,31 +327,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/HexComponent.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <marker date="1548802377535" expanded="false" signature="6:78" ph="..." />
-            <marker date="1548802377535" expanded="true" signature="121:374" ph="{...}" />
-            <marker date="1548802377535" expanded="true" signature="221:372" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/HexBehaviour.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <marker date="1548801773323" expanded="false" signature="6:78" ph="..." />
-            <marker date="1548801773323" expanded="true" signature="121:374" ph="{...}" />
-            <marker date="1548801773323" expanded="true" signature="221:372" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Hex.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-320">
+        <state>
           <folding>
             <marker date="1548826185754" expanded="false" signature="6:138" ph="..." />
             <marker date="1548826185754" expanded="true" signature="140:347" ph="/// The Hex class defines the fgrid position, world space position, size, ... " />
@@ -388,21 +355,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/HexMapContinent.cs">
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/HexBehaviour.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+        <state>
           <folding>
-            <marker date="1548886092565" expanded="false" signature="6:78" ph="..." />
-            <marker date="1548886092565" expanded="true" signature="124:272" ph="{...}" />
-            <marker date="1548886092565" expanded="true" signature="156:270" ph="{...}" />
+            <marker date="1548801773323" expanded="false" signature="6:78" ph="..." />
+            <marker date="1548801773323" expanded="true" signature="121:374" ph="{...}" />
+            <marker date="1548801773323" expanded="true" signature="221:372" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/HexComponent.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <marker date="1548802377535" expanded="false" signature="6:78" ph="..." />
+            <marker date="1548802377535" expanded="true" signature="221:372" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/NEWHexTileMap.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
+        <state relative-caret-position="896">
           <caret line="58" column="39" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
           <folding>
             <marker date="1548886307463" expanded="false" signature="6:78" ph="..." />
@@ -412,6 +388,17 @@
             <marker date="1548886307463" expanded="true" signature="819:2065" ph="{...}" />
             <marker date="1548886307463" expanded="true" signature="885:1942" ph="{...}" />
             <marker date="1548886307463" expanded="true" signature="1021:1932" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/HexMapContinent.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <marker date="1548886092565" expanded="false" signature="6:78" ph="..." />
+            <marker date="1548886092565" expanded="true" signature="124:272" ph="{...}" />
+            <marker date="1548886092565" expanded="true" signature="156:270" ph="{...}" />
           </folding>
         </state>
       </provider>
