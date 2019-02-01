@@ -29,7 +29,7 @@ public class Hex
     static readonly float WIDTH_MULTIPLIER = Mathf.Sqrt(3) / 2;
 
     float radius = 2f;
-    public bool allowWrapEastWest = true;
+    public bool allowWrapEastWest = false;
     public bool allowWrapNorthSouth = false;
     
     /// <summary>
