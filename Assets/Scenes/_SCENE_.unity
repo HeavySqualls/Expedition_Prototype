@@ -153,8 +153,10 @@ MonoBehaviour:
   MatGrassland: {fileID: 2100000, guid: 7d2f7b1ba9cbb3b448aa014351203f00, type: 2}
   MatMountain: {fileID: 2100000, guid: 3e5064501ebbbff43b14347d8821db99, type: 2}
   MatPlains: {fileID: 2100000, guid: ff959dddc9f564245987f4c70c5ab823, type: 2}
+  allowWrapEastWest: 1
+  allowWrapNorthSouth: 0
   numRows: 40
-  numColumns: 30
+  numColumns: 60
 --- !u!4 &16063726
 Transform:
   m_ObjectHideFlags: 0
@@ -234,7 +236,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 17.87696
+  orthographic size: 21.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -258,7 +260,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0.7071068, y: 0.0000000139698395, z: -0.000000011350495, w: 0.7071068}
-  m_LocalPosition: {x: 10.467773, y: 23.99643, z: 41.446365}
+  m_LocalPosition: {x: -91, y: 24, z: 56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

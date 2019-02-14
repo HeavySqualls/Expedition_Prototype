@@ -5,7 +5,7 @@ using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
 /// <summary>
-/// The Hex class defines the fgrid position, world space position, size,
+/// The Hex class defines the grid position, world space position, size,
 /// neighbours, etc... of a Hex tile. However, it does NOT interact with
 /// Unity directly in any way. 
 /// </summary>
@@ -25,11 +25,17 @@ public class Hex
     public readonly int Q; // Column
     public readonly int R; // Row
     public readonly int S; // Sum
+
+    // Data for map generation and maybe in-game effects
+    public float Elevation;
+    public float Moisture;
     
     static readonly float WIDTH_MULTIPLIER = Mathf.Sqrt(3) / 2;
 
     float radius = 2f;
-    public bool allowWrapEastWest = false;
+    
+    //TODO: Link up with the NEWHexTileMap class's version of this
+    public bool allowWrapEastWest = true;
     public bool allowWrapNorthSouth = false;
     
     /// <summary>
@@ -123,6 +129,17 @@ public class Hex
         }
 
         return position;
+    }
+
+    public static float Distance(Hex a, Hex b)
+    {
+        //TODO: fix for horizontal mapping
+        return
+            Mathf.Max(
+                Mathf.Abs(a.Q - b.Q),
+                Mathf.Abs(a.R - b.R),
+                Mathf.Abs(a.S - b.S)
+            );
     }
 
 }

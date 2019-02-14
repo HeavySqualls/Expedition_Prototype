@@ -28,41 +28,110 @@ public class NEWHexTileMap : MonoBehaviour
     public Material MatGrassland;
     public Material MatMountain;
     public Material MatPlains;
-
-    public int numRows = 20;
-    public int numColumns = 40; 
-
     
+    //TODO: Link up with the Hex class's version of this
+    public bool allowWrapEastWest = true;
+    public bool allowWrapNorthSouth = false;
+
+    public int numRows;
+    public int numColumns;
+
+    private Hex[,] hexes;
+    private Dictionary<Hex, GameObject> hexToGameObjectMap;
+
+    public Hex GetHexAt(int x, int y)
+    {
+        if (hexes == null)
+        {
+            Debug.LogError("Hexes array not yet instantiated!");
+            return null;
+        }
+
+        if (allowWrapEastWest)
+        {
+            x = x % numRows;
+        }
+
+        if (allowWrapNorthSouth)
+        {
+            y = y % numColumns;
+        }
+        
+        return hexes[x, y];
+    }
+      
     public virtual void GenerateMap()
     {
+        hexes = new Hex[numColumns, numRows];
+        hexToGameObjectMap = new Dictionary<Hex, GameObject>();
+        
+        // Generate a map filled with ocean
         for (int column = 0; column < numColumns; column++)
-        {
-            
-            // Generate a map filled with ocean
-            
+        { 
             for (int row = 0; row < numRows; row++)
             {
                 // Instantiate a Hex
                 Hex h = new Hex(column, row);
+                h.Elevation = -1.0f;
+
+                hexes[column, row] = h;  
 
                 Vector3 pos = h.PositionFromCamera(Camera.main.transform.position, numRows, numColumns);
                 
                 GameObject hexGO = (GameObject)Instantiate(HexPrefab, pos, Quaternion.identity, this.transform);
 
-                //hexGO.name = string.Format("HEX: {0},{1}", column, row);
+                hexToGameObjectMap[h] = hexGO;
+
+                hexGO.name = string.Format("HEX: {0},{1}", column, row);
                 hexGO.GetComponent<HexComponent>().Hex = h;
                 hexGO.GetComponent<HexComponent>().NEWHexTileMap = this;
 
-                hexGO.GetComponentInChildren<TextMesh>().text = string.Format("{0},{1}", column, row);
+                hexGO.GetComponentInChildren<TextMesh>().text = string.Format("{0},{1}", column, row);     
+            }
+        }
+        
+        UpdateHexVisuals();
+        
+        // StaticBatchingUtility.Combine(this.gameObject); FOR RENDERING ALL TILES AS STATIC FOR EFFICIENCY
+    }
 
+    public void UpdateHexVisuals()
+    {
+        for (int column = 0; column < numColumns; column++)
+        {
+            for (int row = 0; row < numRows; row++)
+            {
+                Hex h = hexes[column, row];
+                GameObject hexGO = hexToGameObjectMap[h];
+                
                 MeshRenderer mr = hexGO.GetComponentInChildren<MeshRenderer>();
-                mr.material = MatWater;
+                if (h.Elevation >= 0)
+                {
+                    mr.material = MatGrassland;
+                }
+                else
+                {
+                    mr.material = MatWater;   
+                }                
                 
                 MeshFilter mf = hexGO.GetComponentInChildren<MeshFilter>();
                 mf.mesh = MeshWater;
             }
         }
+    }
+
+    public Hex[] GetHexesWithinRangeOf(Hex centerHex, int range)
+    {
+        List<Hex> results = new List<Hex>();
         
-        // StaticBatchingUtility.Combine(this.gameObject); FOR RENDERING ALL TILES AS STATIC FOR EFFICIENCY
+        for (int dx = -range;  dx < range-1; dx++)
+        {
+            for (int dy = Mathf.Max(-range+1, -dx-range); dy < Mathf.Min(range, -dx+range-1); dy++)
+            {
+                results.Add(hexes [centerHex.Q + dx, centerHex.R +dy]);
+            }
+        }
+
+        return results.ToArray();
     }
 }
