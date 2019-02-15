@@ -49,12 +49,20 @@ public class NEWHexTileMap : MonoBehaviour
 
         if (allowWrapEastWest)
         {
-            x = x % numRows;
+            x = x % numColumns;
+            if (x < 0)
+            {
+                x += numColumns;
+            }
         }
 
         if (allowWrapNorthSouth)
         {
-            y = y % numColumns;
+            y = y % numRows;
+            if (y < 0)
+            {
+                y += numRows;
+            }
         }
         
         return hexes[x, y];
@@ -72,7 +80,7 @@ public class NEWHexTileMap : MonoBehaviour
             {
                 // Instantiate a Hex
                 Hex h = new Hex(column, row);
-                h.Elevation = -1.0f;
+                h.Elevation = -0.5f; // <------------------ BASE OCEAN LEVEL!
 
                 hexes[column, row] = h;  
 
@@ -128,7 +136,7 @@ public class NEWHexTileMap : MonoBehaviour
         {
             for (int dy = Mathf.Max(-range+1, -dx-range); dy < Mathf.Min(range, -dx+range-1); dy++)
             {
-                results.Add(hexes [centerHex.Q + dx, centerHex.R +dy]);
+                results.Add (  GetHexAt(centerHex.Q + dx, centerHex.R +dy) );
             }
         }
 

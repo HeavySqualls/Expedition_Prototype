@@ -155,7 +155,7 @@ MonoBehaviour:
   MatPlains: {fileID: 2100000, guid: ff959dddc9f564245987f4c70c5ab823, type: 2}
   allowWrapEastWest: 1
   allowWrapNorthSouth: 0
-  numRows: 40
+  numRows: 30
   numColumns: 60
 --- !u!4 &16063726
 Transform:
@@ -236,7 +236,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 21.5
+  orthographic size: 18.11
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -260,7 +260,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0.7071068, y: 0.0000000139698395, z: -0.000000011350495, w: 0.7071068}
-  m_LocalPosition: {x: -91, y: 24, z: 56}
+  m_LocalPosition: {x: 123, y: 24, z: 56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
