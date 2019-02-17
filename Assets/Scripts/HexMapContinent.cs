@@ -5,14 +5,15 @@ using UnityEngine;
 public class HexMapContinent : NEWHexTileMap
 {
     override public void GenerateMap()
-    {     
-        // Call the base version to generate all the hexes we need
+    {    
         base.GenerateMap();
         
-        int numContinents = 2;
-        int continentSpacing = 20;
+        int numContinents = 4; // <--------------------------------------------------------- Number of continents
+        int continentSpacing = numColumns / numContinents; // < ---------------------------------------------------- Spacing of continents
 
-        for (int c = 0; c < continentSpacing; c++)
+        Random.InitState(4); // seed generator
+        
+        for (int c = 0; c < numContinents; c++)
         {
             // Make some kind of raised area 
             int numSplats = Random.Range(4, 8); // <----------------------------------------- Amount of "Splats"
@@ -25,11 +26,30 @@ public class HexMapContinent : NEWHexTileMap
                 ElevateArea(x, y, range);
             }
         }
+
+        // Perlin Noise
+        float noiseResolution = 0.05f; // <---------------------------------------------------- Larger values increase density of heights (ie. larger mountainous areas together)
+        Vector2 noiseOffset = new Vector2( Random.Range(0f ,1f), Random.Range(0f, 1f));
         
+        float noiseScale = 1.85f; // <---------------------------------------------------------- Larger values makes more islands (and lakes) 
+        
+        for (int column = 0; column < numColumns; column++)
+        {
+            for (int row = 0; row < numRows; row++)
+            {
+                Hex h = GetHexAt(column, row);
+                float n = 
+                        Mathf.PerlinNoise(((float) column/Mathf.Max(numColumns, numRows) / noiseResolution) + noiseOffset.x, 
+                        ((float) row/Mathf.Max(numColumns, numRows)/ noiseResolution) + noiseOffset.y) 
+                        - 0.5f;
+                h.Elevation += n * noiseScale;
+            }
+        }
+
         UpdateHexVisuals();
     }
 
-    void ElevateArea(int q, int r, int range, float centerHeight = 1f)
+    void ElevateArea(int q, int r, int range, float centerHeight = 0.8f)
     {
         Hex centerHex = GetHexAt(q, r);
 
@@ -37,11 +57,7 @@ public class HexMapContinent : NEWHexTileMap
 
         foreach (Hex h in areaHexes)
         {
-//            if (h.Elevation < 0)
-//            {
-//                h.Elevation = 0;
-//            }
-            h.Elevation += centerHeight * Mathf.Lerp(1f, 0.25f, Hex.Distance(centerHex, h) / range);
+            h.Elevation = centerHeight * Mathf.Lerp(1f, 0.25f, Mathf.Pow(Hex.Distance(centerHex, h) / range, 2f));
         }
     }   
 }

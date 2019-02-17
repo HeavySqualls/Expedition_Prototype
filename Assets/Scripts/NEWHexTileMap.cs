@@ -10,6 +10,8 @@ public class NEWHexTileMap : MonoBehaviour
         GenerateMap();
     }
     
+//-------- VARIABLES ---------//     
+    
     public GameObject HexPrefab;
 
     // Create meshes to hold more detailed tile information 
@@ -17,10 +19,6 @@ public class NEWHexTileMap : MonoBehaviour
     public Mesh MeshFlat;
     public Mesh MeshHill;
     public Mesh MeshMountain;
-    
-
-    // Create an array of different terrain materials 
-    //public Material[] HexMaterials;
 
     // Create specific meshes for more detailed map generation
     public Material MatWater;
@@ -28,17 +26,26 @@ public class NEWHexTileMap : MonoBehaviour
     public Material MatGrassland;
     public Material MatMountain;
     public Material MatPlains;
+
+    // Tiles with height above whatever is whatever
+    public float HeightMountain = 1f;
+    public float HeightHill = 0.6f;
+    public float HeightFlat = 0.0f;
+
+    public int numRows;
+    public int numColumns;
     
     //TODO: Link up with the Hex class's version of this
     public bool allowWrapEastWest = true;
     public bool allowWrapNorthSouth = false;
 
-    public int numRows;
-    public int numColumns;
-
     private Hex[,] hexes;
     private Dictionary<Hex, GameObject> hexToGameObjectMap;
 
+    
+    
+    
+    
     public Hex GetHexAt(int x, int y)
     {
         if (hexes == null)
@@ -113,9 +120,17 @@ public class NEWHexTileMap : MonoBehaviour
                 GameObject hexGO = hexToGameObjectMap[h];
                 
                 MeshRenderer mr = hexGO.GetComponentInChildren<MeshRenderer>();
-                if (h.Elevation >= 0)
+                if (h.Elevation >= HeightMountain)
+                {
+                    mr.material = MatMountain;
+                }
+                else if (h.Elevation >= HeightHill)
                 {
                     mr.material = MatGrassland;
+                }
+                else if (h.Elevation >= HeightFlat)
+                {
+                    mr.material = MatPlains;
                 }
                 else
                 {
