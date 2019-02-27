@@ -12,8 +12,10 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Hex
 {
-    public Hex(int q, int r)
+    public Hex(NEWHexTileMap newHexTileMap, int q, int r)
     {
+        this.newHexTileMap = newHexTileMap;
+         
         this.Q = q;
         this.R = r;
         this.S = -(q + r);
@@ -29,14 +31,12 @@ public class Hex
     // Data for map generation and maybe in-game effects
     public float Elevation;
     public float Moisture;
+
+    private NEWHexTileMap newHexTileMap;
     
     static readonly float WIDTH_MULTIPLIER = Mathf.Sqrt(3) / 2;
 
     float radius = 2f;
-    
-    //TODO: Link up with the NEWHexTileMap class's version of this
-    public bool allowWrapEastWest = true;
-    public bool allowWrapNorthSouth = false;
     
     /// <summary>
     /// Retuns the world-space position of this hex
@@ -78,7 +78,7 @@ public class Hex
 
         Vector3 position = Position();
 
-        if (allowWrapEastWest)
+        if (newHexTileMap.allowWrapEastWest)
         {
 
             float howManyWidthsFromCamera = (position.x - cameraPosition.x) / mapWidth;
@@ -103,7 +103,7 @@ public class Hex
             position.x -= howManyWidthsToFix * mapWidth;
         }
         
-        if (allowWrapNorthSouth)
+        if (newHexTileMap.allowWrapNorthSouth)
         {
 
             float howManyHeightsFromCamera = (position.z - cameraPosition.z) / mapHeight;
@@ -133,7 +133,22 @@ public class Hex
 
     public static float Distance(Hex a, Hex b)
     {
-        //TODO: fix for horizontal mapping
+        // WARNING: PROBABLY WRONG for wrapping
+        int distanceQ = Mathf.Abs(a.Q - b.Q);
+        
+        if (a.newHexTileMap.allowWrapEastWest)
+        {
+            if (distanceQ > a.newHexTileMap.numColumns / 2)
+                distanceQ = a.newHexTileMap.numColumns - distanceQ;
+        }
+
+        if (a.newHexTileMap.allowWrapNorthSouth)
+        {
+            int distanceR = Mathf.Abs(a.R - b.R);
+            if (distanceR > a.newHexTileMap.numRows / 2)
+                distanceR = a.newHexTileMap.numRows - distanceR;   
+        }
+        
         return
             Mathf.Max(
                 Mathf.Abs(a.Q - b.Q),
@@ -141,5 +156,4 @@ public class Hex
                 Mathf.Abs(a.S - b.S)
             );
     }
-
 }

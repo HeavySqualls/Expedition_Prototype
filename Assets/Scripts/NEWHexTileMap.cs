@@ -35,7 +35,7 @@ public class NEWHexTileMap : MonoBehaviour
     public int numRows;
     public int numColumns;
     
-    //TODO: Link up with the Hex class's version of this
+    // Wrapping options
     public bool allowWrapEastWest = true;
     public bool allowWrapNorthSouth = false;
 
@@ -86,7 +86,7 @@ public class NEWHexTileMap : MonoBehaviour
             for (int row = 0; row < numRows; row++)
             {
                 // Instantiate a Hex
-                Hex h = new Hex(column, row);
+                Hex h = new Hex( this, column, row);
                 h.Elevation = -0.5f; // <------------------ BASE OCEAN LEVEL!
 
                 hexes[column, row] = h;  
