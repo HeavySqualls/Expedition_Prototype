@@ -28,10 +28,10 @@ public class HexMapContinent : NEWHexTileMap
         }
 
         // Perlin Noise
-        float noiseResolution = 0.05f; // <---------------------------------------------------- Larger values increase density of heights (ie. larger mountainous areas together)
+        float noiseResolution = 0.06f; // <---------------------------------------------------- Larger values increase density of heights (ie. larger mountainous areas together)
         Vector2 noiseOffset = new Vector2( Random.Range(0f ,1f), Random.Range(0f, 1f));
         
-        float noiseScale = 1.85f; // <---------------------------------------------------------- Larger values makes more islands (and lakes) 
+        float noiseScale = 2f; // <---------------------------------------------------------- Larger values makes more islands (and lakes) 
         
         for (int column = 0; column < numColumns; column++)
         {
@@ -43,6 +43,25 @@ public class HexMapContinent : NEWHexTileMap
                         ((float) row/Mathf.Max(numColumns, numRows)/ noiseResolution) + noiseOffset.y) 
                         - 0.5f;
                 h.Elevation += n * noiseScale;
+            }
+        }
+
+        // Simulate rainfall/moisture and set plains/grasslands + forest
+        noiseResolution = 0.05f; // <---------------------------------------------------- Larger values increase density of biomes (ie. larger forested areas together)
+        noiseOffset = new Vector2(Random.Range(0f, 1f), Random.Range(0f, 1f));
+
+        noiseScale = 1.85f; // <---------------------------------------------------------- Larger values makes more islands (and lakes) 
+
+        for (int column = 0; column < numColumns; column++)
+        {
+            for (int row = 0; row < numRows; row++)
+            {
+                Hex h = GetHexAt(column, row);
+                float n =
+                        Mathf.PerlinNoise(((float)column / Mathf.Max(numColumns, numRows) / noiseResolution) + noiseOffset.x,
+                        ((float)row / Mathf.Max(numColumns, numRows) / noiseResolution) + noiseOffset.y)
+                        - 0.5f;
+                h.Moisture += n * noiseScale;
             }
         }
 

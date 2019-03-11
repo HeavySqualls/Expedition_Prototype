@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="96102444-5f61-434f-84d3-d69274ad0ab0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Expedition_Prototype/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Expedition_Prototype/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/HexPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/HexPrefab.prefab" afterDir="false" />
-    </list>
+    <list default="true" id="96102444-5f61-434f-84d3-d69274ad0ab0" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +12,7 @@
     <session id="184751512">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.29" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.45" value="1" />
@@ -87,7 +84,7 @@
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/NEWHexTileMap.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="432">
-              <caret line="100" column="24" lean-forward="true" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
+              <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
               <folding>
                 <marker date="1551296532172" expanded="false" signature="6:78" ph="..." />
                 <marker date="1551296532172" expanded="true" signature="122:4503" ph="{...}" />
@@ -177,7 +174,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="415" />
     <option name="width" value="1313" />
     <option name="height" value="1047" />
@@ -252,8 +249,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="415" y="0" width="1313" height="1047" extended-state="1" />
-    <editor active="true" />
+    <frame x="415" y="0" width="1313" height="1047" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.2527331" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -367,7 +363,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/NEWHexTileMap.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
-          <caret line="100" column="24" lean-forward="true" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
+          <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
           <folding>
             <marker date="1551296532172" expanded="false" signature="6:78" ph="..." />
             <marker date="1551296532172" expanded="true" signature="122:4503" ph="{...}" />
