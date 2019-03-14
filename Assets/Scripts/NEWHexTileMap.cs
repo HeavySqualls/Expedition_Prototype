@@ -129,19 +129,33 @@ public class NEWHexTileMap : MonoBehaviour
                 MeshFilter mf = hexGO.GetComponentInChildren<MeshFilter>();
 
                 // MOISTURE
-                if (h.Elevation >= HeightFlat)
+                if (h.Elevation >= HeightFlat && h.Elevation < HeightMountain)
                 {
                     if (h.Moisture >= MoistureJungle)
                     {
                         mr.material = MatGrassland;
-                        // TODO: spawn Jungle
-                        GameObject.Instantiate(JunglePrefab, hexGO.transform.position, Quaternion.identity, hexGO.transform);
+
+                        // TODO: Spawn Jungle
+                        Vector3 p = hexGO.transform.position;
+                        if (h.Elevation >= HeightHill)
+                        {
+                            p.y += 0.3f;
+                        }
+
+                        GameObject.Instantiate(JunglePrefab, p, Quaternion.identity, hexGO.transform);
                     }
                     else if (h.Moisture >= MoistureForest)
                     {
                         mr.material = MatGrassland;
-                        // TODO: spawn Forest
-                        GameObject.Instantiate(ForestPrefab, hexGO.transform.position, Quaternion.identity, hexGO.transform);
+
+                        // Spawn Forest
+                        Vector3 p = hexGO.transform.position;
+                        if (h.Elevation >= HeightHill)
+                        {
+                            p.y += 0.3f;
+                        }                            
+
+                        GameObject.Instantiate(ForestPrefab, p, Quaternion.identity, hexGO.transform);
                     }
                     else if (h.Moisture >= MoistureGrasslands)
                     {

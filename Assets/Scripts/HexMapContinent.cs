@@ -46,7 +46,8 @@ public class HexMapContinent : NEWHexTileMap
             }
         }
 
-        // Simulate rainfall/moisture and set plains/grasslands + forest
+        // SIMULATE RAINFALL/MOISTURE - and set plains/grasslands + forest
+
         noiseResolution = 0.05f; // <---------------------------------------------------- Larger values increase density of biomes (ie. larger forested areas together)
         noiseOffset = new Vector2(Random.Range(0f, 1f), Random.Range(0f, 1f));
 
