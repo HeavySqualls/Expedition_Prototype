@@ -34,7 +34,7 @@ public class Hex
 
     private NEWHexTileMap newHexTileMap;
     
-    static readonly float WIDTH_MULTIPLIER = Mathf.Sqrt(2.96f) / 2; // <--------------------- HEX HORIZONTAL SPACING VARIABLE!!
+    static readonly float WIDTH_MULTIPLIER = Mathf.Sqrt(2.992f) / 2; // <--------------------- HEX HORIZONTAL SPACING VARIABLE!!
 
     float radius = 2f;
     
