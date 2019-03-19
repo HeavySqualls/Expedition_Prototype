@@ -31,22 +31,22 @@ public class NEWHexTileMap : MonoBehaviour
     public Material MatPlains;
 
     // Determining factors in moisture distribution 
-    public float MoistureJungle = 1f;
-    public float MoistureForest = 0.8f;
-    public float MoistureGrasslands = 0.33f;
-    public float MoisturePlains = 0f;
+    [System.NonSerialized] public float MoistureJungle = 0.66f;
+    [System.NonSerialized] public float MoistureForest = 0.2f;
+    [System.NonSerialized] public float MoistureGrasslands = 0f;
+    [System.NonSerialized] public float MoisturePlains = -0.5f;
 
     // Tiles with height above whatever is whatever
-    public float HeightMountain = 1f;
-    public float HeightHill = 0.6f;
-    public float HeightFlat = 0.0f;
+    [System.NonSerialized] public float HeightMountain = 0.85f;
+    [System.NonSerialized] public float HeightHill = 0.6f;
+    [System.NonSerialized] public float HeightFlat = 0.0f;
 
-    public int numRows;
-    public int numColumns;
-    
+    [System.NonSerialized] public int numRows = 30;
+    [System.NonSerialized] public int numColumns = 60;
+
     // Wrapping options
-    public bool allowWrapEastWest = true;
-    public bool allowWrapNorthSouth = false;
+    [System.NonSerialized] public bool allowWrapEastWest = true;
+    [System.NonSerialized] public bool allowWrapNorthSouth = false;
 
     private Hex[,] hexes;
     private Dictionary<Hex, GameObject> hexToGameObjectMap;

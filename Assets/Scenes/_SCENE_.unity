@@ -157,17 +157,6 @@ MonoBehaviour:
   MatGrassland: {fileID: 2100000, guid: 7d2f7b1ba9cbb3b448aa014351203f00, type: 2}
   MatMountain: {fileID: 2100000, guid: 3e5064501ebbbff43b14347d8821db99, type: 2}
   MatPlains: {fileID: 2100000, guid: ff959dddc9f564245987f4c70c5ab823, type: 2}
-  MoistureJungle: 0.66
-  MoistureForest: 0.2
-  MoistureGrasslands: 0
-  MoisturePlains: -0.5
-  HeightMountain: 0.85
-  HeightHill: 0.6
-  HeightFlat: 0
-  numRows: 30
-  numColumns: 60
-  allowWrapEastWest: 1
-  allowWrapNorthSouth: 0
 --- !u!4 &16063726
 Transform:
   m_ObjectHideFlags: 0
