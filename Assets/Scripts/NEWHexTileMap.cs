@@ -9,6 +9,21 @@ public class NEWHexTileMap : MonoBehaviour
     {
         GenerateMap();
     }
+
+    void Update()
+    {
+        // TESTING: Hit spacebar to advance to next turn
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (units != null)
+            {
+                foreach (Unit u in units)
+                {
+                    u.DoTurn();
+                }
+            }
+        }
+    }
     
 //-------- VARIABLES ---------//     
     
@@ -86,7 +101,19 @@ public class NEWHexTileMap : MonoBehaviour
         
         return hexes[x, y];
     }
-      
+
+    public Vector3 GetHexPosition(int q, int r)
+    {
+        Hex hex = GetHexAt(q, r);
+
+        return GetHexPosition(hex);
+    }
+
+    public Vector3 GetHexPosition(Hex hex)
+    {
+        return hex.PositionFromCamera(Camera.main.transform.position, numRows, numColumns);
+    }
+
     public virtual void GenerateMap()
     {
         hexes = new Hex[numColumns, numRows];
@@ -224,8 +251,12 @@ public class NEWHexTileMap : MonoBehaviour
             unitToGameObjectMap = new Dictionary<Unit, GameObject>();
         }
 
-        GameObject myHex = hexToGameObjectMap[GetHexAt(q, r)];
-        GameObject unitGO = (GameObject)Instantiate(prefab, myHex.transform.position, Quaternion.identity, myHex.transform);
+        Hex myHex = GetHexAt(q, r);
+        GameObject myHexGO = hexToGameObjectMap[myHex];
+        unit.SetHex(myHex);
+
+        GameObject unitGO = (GameObject)Instantiate(prefab, myHexGO.transform.position, Quaternion.identity, myHexGO.transform);
+        unit.OnUnitMoved += unitGO.GetComponent<UnitView>().OnUnitMoved;
 
         units.Add(unit);
         unitToGameObjectMap.Add(unit, unitGO);

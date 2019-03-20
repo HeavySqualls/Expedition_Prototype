@@ -12,16 +12,39 @@ public class Unit
 
     public Hex Hex { get; protected set; }
 
+    public delegate void UnitMovedDelegate(Hex oldHex, Hex newHex);
+    public event UnitMovedDelegate OnUnitMoved;
+
     // **** SET THE UNIT ON A SPECIFIC HEX **** //
 
-    public void SetHex (Hex hex)
+    public void SetHex (Hex newHex)
     {
-        if (hex != null) // if unit is already on a hex, 
+        Hex oldHex = Hex;
+        if (Hex != null) // if unit is already on a hex, 
         {
             Hex.RemoveUnit(this); // remove it from that hex
         }
 
-        Hex = hex;  
+        Hex = newHex;  
+
         Hex.AddUnit(this); // add the unit to the new hex
+
+        if (OnUnitMoved != null)
+        {
+            OnUnitMoved(oldHex, newHex);
+        }
+    }
+
+    public void DoTurn()
+    {
+        Debug.Log("DoTurn");
+        // do queued move?
+
+        // TESTING: Move us one tile to the right
+
+        Hex oldHex = Hex;
+        Hex newHex = oldHex.NewHexTileMap.GetHexAt(oldHex.Q + 1, oldHex.R);
+
+        SetHex(newHex);
     }
 }

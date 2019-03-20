@@ -15,7 +15,7 @@ public class Hex
 {
     public Hex(NEWHexTileMap newHexTileMap, int q, int r)
     {
-        this.newHexTileMap = newHexTileMap;
+        this.NewHexTileMap = newHexTileMap;
          
         this.Q = q;
         this.R = r;
@@ -33,7 +33,7 @@ public class Hex
     public float Elevation;
     public float Moisture;
 
-    private NEWHexTileMap newHexTileMap;
+    public readonly NEWHexTileMap NewHexTileMap;
     
     static readonly float WIDTH_MULTIPLIER = Mathf.Sqrt(2.992f) / 2; // <--------------------- HEX HORIZONTAL SPACING VARIABLE!!
 
@@ -73,6 +73,11 @@ public class Hex
         return HexWidth();
     }
 
+    public Vector3 PositionFromCamera()
+    {
+        return NewHexTileMap.GetHexPosition(this);
+    }
+
     //CODE FOR SETTING UP A GLOBAL CAMERA (eg. a map that wraps around from left to right, top to bottom like a globe)
     public Vector3 PositionFromCamera(Vector3 cameraPosition, float numRows, float numColumns)
     {
@@ -81,7 +86,7 @@ public class Hex
 
         Vector3 position = Position();
 
-        if (newHexTileMap.allowWrapEastWest)
+        if (NewHexTileMap.allowWrapEastWest)
         {
 
             float howManyWidthsFromCamera = (position.x - cameraPosition.x) / mapWidth;
@@ -106,7 +111,7 @@ public class Hex
             position.x -= howManyWidthsToFix * mapWidth;
         }
         
-        if (newHexTileMap.allowWrapNorthSouth)
+        if (NewHexTileMap.allowWrapNorthSouth)
         {
 
             float howManyHeightsFromCamera = (position.z - cameraPosition.z) / mapHeight;
@@ -139,17 +144,17 @@ public class Hex
         // WARNING: PROBABLY WRONG for wrapping
         int distanceQ = Mathf.Abs(a.Q - b.Q);
         
-        if (a.newHexTileMap.allowWrapEastWest)
+        if (a.NewHexTileMap.allowWrapEastWest)
         {
-            if (distanceQ > a.newHexTileMap.numColumns / 2)
-                distanceQ = a.newHexTileMap.numColumns - distanceQ;
+            if (distanceQ > a.NewHexTileMap.numColumns / 2)
+                distanceQ = a.NewHexTileMap.numColumns - distanceQ;
         }
 
-        if (a.newHexTileMap.allowWrapNorthSouth)
+        if (a.NewHexTileMap.allowWrapNorthSouth)
         {
             int distanceR = Mathf.Abs(a.R - b.R);
-            if (distanceR > a.newHexTileMap.numRows / 2)
-                distanceR = a.newHexTileMap.numRows - distanceR;   
+            if (distanceR > a.NewHexTileMap.numRows / 2)
+                distanceR = a.NewHexTileMap.numRows - distanceR;   
         }
         
         return
