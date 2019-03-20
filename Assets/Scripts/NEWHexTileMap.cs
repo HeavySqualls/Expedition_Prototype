@@ -232,6 +232,7 @@ public class NEWHexTileMap : MonoBehaviour, IQPathWorld
                 else if (h.Elevation >= HeightFlat)
                 {
                     mf.mesh = MeshFlat;
+                    h.MovementCost = 1.001f;
                 }
                 else
                 {

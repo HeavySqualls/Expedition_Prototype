@@ -89,7 +89,7 @@ namespace QPath
 
                     // Is the neighbour already in the open set?
                     //   If so, and if this new score is worse than the old score,
-                    //   discard this new result.
+                    //   discard this new result. more info @ 25:00 in pt 19
                     if (openSet.Contains(neighbour) && tentative_g_score >= g_score[neighbour])
                     {
                         continue;

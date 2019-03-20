@@ -35,7 +35,7 @@ public class Hex : IQPathTile
     public float Moisture;
 
     // TODO: This is just a temp public value
-    public int MovementCost = 1; 
+    public float MovementCost = 1f; // CHANGED FROM INT TO FLOAT TO EXPERIMENT WITH NAVIGATION TRICK (adding .001 on to flat surfaces so the unit prioritizes hills if paths are equal)
 
     //TODO: Need some kind of property to track hex type (plains, grasslands, etc.....)
     //TODO: Need property to track hex details (forest, mine, farm...)
@@ -205,7 +205,7 @@ public class Hex : IQPathTile
         return units.ToArray();
     }
 
-    public int BaseMovementCost()
+    public float BaseMovementCost()
     {
         //TODO: Factor in terrain type & features
         return MovementCost;

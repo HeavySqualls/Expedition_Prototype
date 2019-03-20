@@ -79,7 +79,7 @@ public class Unit : IQPathUnit
         SetHex(newHex);
     }
 
-    public int MovementCostToEnterHex(Hex hex)
+    public float MovementCostToEnterHex(Hex hex)
     {
         //TODO: Override base movement cost based on our movement mode + tile type. 
         return hex.BaseMovementCost();
@@ -95,7 +95,7 @@ public class Unit : IQPathUnit
         if (baseTurnsToEnterHex < 0)
         {
             // Impassable terrain
-            Debug.Log("Impassable Terrain at: " + Hex.ToString());
+            Debug.Log("Impassable Terrain at: " + hex.ToString());
             return -99;
         }
         if (baseTurnsToEnterHex > 1)
