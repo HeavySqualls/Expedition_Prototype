@@ -30,6 +30,9 @@ public class NEWHexTileMap : MonoBehaviour
     public Material MatMountain;
     public Material MatPlains;
 
+    // Units 
+    public GameObject PlayerPrefab;
+
     // Determining factors in moisture distribution 
     [System.NonSerialized] public float MoistureJungle = 0.66f;
     [System.NonSerialized] public float MoistureForest = 0.2f;
@@ -51,7 +54,10 @@ public class NEWHexTileMap : MonoBehaviour
     private Hex[,] hexes;
     private Dictionary<Hex, GameObject> hexToGameObjectMap;
 
-    
+    private HashSet<Unit> units;
+    private Dictionary<Unit, GameObject> unitToGameObjectMap;
+
+
     public Hex GetHexAt(int x, int y)
     {
         if (hexes == null)
@@ -208,5 +214,20 @@ public class NEWHexTileMap : MonoBehaviour
         }
 
         return results.ToArray();
+    }
+
+    public void SpawnUnitAt (Unit unit, GameObject prefab, int q, int r)
+    {
+        if (units == null)
+        {
+            units = new HashSet<Unit>();
+            unitToGameObjectMap = new Dictionary<Unit, GameObject>();
+        }
+
+        GameObject myHex = hexToGameObjectMap[GetHexAt(q, r)];
+        GameObject unitGO = (GameObject)Instantiate(prefab, myHex.transform.position, Quaternion.identity, myHex.transform);
+
+        units.Add(unit);
+        unitToGameObjectMap.Add(unit, unitGO);
     }
 }

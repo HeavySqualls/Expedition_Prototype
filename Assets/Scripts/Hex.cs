@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
+using System.Linq;
 
 /// <summary>
 /// The Hex class defines the grid position, world space position, size,
@@ -37,6 +38,8 @@ public class Hex
     static readonly float WIDTH_MULTIPLIER = Mathf.Sqrt(2.992f) / 2; // <--------------------- HEX HORIZONTAL SPACING VARIABLE!!
 
     float radius = 2f;
+
+    HashSet<Unit> units;
     
     /// <summary>
     /// Retuns the world-space position of this hex
@@ -155,5 +158,28 @@ public class Hex
                 Mathf.Abs(a.R - b.R),
                 Mathf.Abs(a.S - b.S)
             );
+    }
+
+    public void AddUnit( Unit unit)
+    {
+        if (units == null)
+        {
+            units = new HashSet<Unit>();
+        }
+
+        units.Add(unit);
+    }
+
+    public void RemoveUnit (Unit unit)
+    {
+        if (units != null)
+        {
+            units.Remove(unit);
+        }       
+    }
+
+    public Unit[] Units()
+    {
+        return units.ToArray();
     }
 }

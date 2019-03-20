@@ -157,6 +157,8 @@ MonoBehaviour:
   MatGrassland: {fileID: 2100000, guid: 7d2f7b1ba9cbb3b448aa014351203f00, type: 2}
   MatMountain: {fileID: 2100000, guid: 3e5064501ebbbff43b14347d8821db99, type: 2}
   MatPlains: {fileID: 2100000, guid: ff959dddc9f564245987f4c70c5ab823, type: 2}
+  PlayerPrefab: {fileID: 3655366384383759814, guid: 62737851484afa04db7448274d391f5b,
+    type: 3}
 --- !u!4 &16063726
 Transform:
   m_ObjectHideFlags: 0

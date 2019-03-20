@@ -87,40 +87,14 @@ public class CameraMouseController : MonoBehaviour
 
             Camera.main.transform.position = p;
 
-
-                    // ***** ADJUST ANGLE WITH ZOOM ***** //
-
             float lowZoom = minHeight +5f;
             float highZoom = maxHeight -5f;
-
-            //if (p.y < lowZoom)                                 // for a controlled angle adjustment while zooming
-            //{
-            //    Camera.main.transform.rotation = Quaternion.Euler(
-            //        Mathf.Lerp(10, 55, ((p.y-minHeight) /(lowZoom-minHeight))),
-            //        Camera.main.transform.rotation.eulerAngles.y,
-            //        Camera.main.transform.rotation.eulerAngles.z
-            //        );
-            //}
-            //else if (p.y > highZoom)
-            //{
-            //    Camera.main.transform.rotation = Quaternion.Euler(
-            //        Mathf.Lerp(55, 90, ((p.y-highZoom) / (maxHeight - highZoom))),
-            //        Camera.main.transform.rotation.eulerAngles.y,
-            //        Camera.main.transform.rotation.eulerAngles.z
-            //        );
-            //}
-            //else
-            //{
-            //    Camera.main.transform.rotation = Quaternion.Euler(
-            //       55,
-            //       Camera.main.transform.rotation.eulerAngles.y,
-            //       Camera.main.transform.rotation.eulerAngles.z
-            //       );
-            //}
         }
 
+        // ***** ADJUST ANGLE WITH ZOOM ***** //
+
         Camera.main.transform.rotation = Quaternion.Euler( // for a constant & smooth angle adjustment while zooming
-             Mathf.Lerp(25, 80, Camera.main.transform.position.y / (maxHeight / 1f)), // <--------------------------------------------------------- Adjustments for min/max zoom angle
+             Mathf.Lerp(25, 80, Camera.main.transform.position.y / (maxHeight / 1f)), // <----------------------------------------------------- Adjustments for min/max zoom angle
              Camera.main.transform.rotation.eulerAngles.y,
              Camera.main.transform.rotation.eulerAngles.z
              );

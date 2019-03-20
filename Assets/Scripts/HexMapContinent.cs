@@ -67,6 +67,9 @@ public class HexMapContinent : NEWHexTileMap
         }
 
         UpdateHexVisuals();
+         
+        Unit unit = new Unit();
+        SpawnUnitAt(unit, PlayerPrefab, 12, 7);
     }
 
     void ElevateArea(int q, int r, int range, float centerHeight = 0.8f)
