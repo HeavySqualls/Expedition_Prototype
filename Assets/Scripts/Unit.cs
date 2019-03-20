@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using QPath;
 
-public class Unit
+public class Unit : IQPathUnit
 {
     public string Name = "Unnamed";
     public int HitPoints = 10;
@@ -140,5 +141,14 @@ public class Unit
         // I say no, this is an "aggregate" function, so return the total turn cost of turnsToDate + turns for this move. 
 
         return turnsToDate + turnsUsedAfterThisMove;
+    }
+
+
+    /// <summary>
+    /// Turn cost to enter a hex (Ex: 0.5 turns if movement cost is 1 and we have 2 max movement)
+    /// </summary>
+    public float CostToEnterHex(IQPathTile sourceTile, IQPathTile destinationTile)
+    {
+        return 1;
     }
 }

@@ -4,6 +4,7 @@ using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 using System.Linq;
+using QPath;
 
 /// <summary>
 /// The Hex class defines the grid position, world space position, size,
@@ -11,7 +12,7 @@ using System.Linq;
 /// Unity directly in any way. 
 /// </summary>
 
-public class Hex
+public class Hex : IQPathTile
 {
     public Hex(NEWHexTileMap newHexTileMap, int q, int r)
     {
@@ -196,4 +197,16 @@ public class Hex
         //TODO: Factor in terrain type & features
         return 1;
     }
+
+    #region IQPathTile implementation
+    public IQPathTile[] GetNeighbours()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public float AggregateCostToEnter(float costSoFar, IQPathTile sourceTile, IQPathUnit theUnit)
+    {
+        throw new System.NotImplementedException();
+    }
+    #endregion
 }

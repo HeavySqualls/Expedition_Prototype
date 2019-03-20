@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using QPath;
 
-public class NEWHexTileMap : MonoBehaviour
+public class NEWHexTileMap : MonoBehaviour, IQPathWorld
 {
     
     void Start()
