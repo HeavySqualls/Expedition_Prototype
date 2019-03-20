@@ -58,7 +58,8 @@ namespace QPath
                 T current = openSet.Dequeue();
 
                 // Check to see if we are there.
-                if (System.Object.ReferenceEquals(current, endTile))
+                if (System.Object.ReferenceEquals(current, endTile)) // do current and endtile point to the same object in memory?
+   
                 {
                     Reconstruct_path(came_From, current);
                     return;

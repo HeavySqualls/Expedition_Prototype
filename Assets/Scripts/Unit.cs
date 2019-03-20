@@ -44,7 +44,7 @@ public class Unit : IQPathUnit
 
     public void DUMMY_PATHING_FUNCTION()
     {
-        Hex[] p = (Hex[])QPath.QPath.FindPath(
+        Hex[] p = (Hex[])QPath.QPath.FindPath<Hex>(
             Hex.NewHexTileMap, 
             this, 
             Hex, 
@@ -56,10 +56,17 @@ public class Unit : IQPathUnit
         SetHexPath(p);
     }
 
-    public void SetHexPath(Hex[] hexPath)
+    public void ClearHexPath()// < ------------ Function to call to clear units current pathing. 
     {
-        this.hexPath = new Queue<Hex>(hexPath);
-        this.hexPath.Dequeue(); // First hex is the one we're standing in, so throw it out. 
+        this.hexPath = new Queue<Hex>();
+    }
+
+    public void SetHexPath(Hex[] hexArray)
+    {
+        this.hexPath = new Queue<Hex>(hexArray);
+
+        if (hexPath.Count > 0)
+            this.hexPath.Dequeue(); // First hex is the one we're standing in, so throw it out. 
     }
 
     public void DoTurn()
