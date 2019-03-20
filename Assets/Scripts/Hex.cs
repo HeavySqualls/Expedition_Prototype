@@ -33,6 +33,9 @@ public class Hex
     public float Elevation;
     public float Moisture;
 
+    //TODO: Need some kind of property to track hex type (plains, grasslands, etc.....)
+    //TODO: Need property to track hex details (forest, mine, farm...)
+
     public readonly NEWHexTileMap NewHexTileMap;
     
     static readonly float WIDTH_MULTIPLIER = Mathf.Sqrt(2.992f) / 2; // <--------------------- HEX HORIZONTAL SPACING VARIABLE!!
@@ -186,5 +189,11 @@ public class Hex
     public Unit[] Units()
     {
         return units.ToArray();
+    }
+
+    public int BaseMovementCost()
+    {
+        //TODO: Factor in terrain type & features
+        return 1;
     }
 }
