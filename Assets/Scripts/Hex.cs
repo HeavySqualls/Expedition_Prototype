@@ -34,6 +34,9 @@ public class Hex : IQPathTile
     public float Elevation;
     public float Moisture;
 
+    // TODO: This is just a temp public value
+    public int MovementCost = 1; 
+
     //TODO: Need some kind of property to track hex type (plains, grasslands, etc.....)
     //TODO: Need property to track hex details (forest, mine, farm...)
 
@@ -44,7 +47,12 @@ public class Hex : IQPathTile
     float radius = 2f;
 
     HashSet<Unit> units;
-    
+
+    public override string ToString()
+    {
+        return Q + ", " + R;
+    }
+
     /// <summary>
     /// Retuns the world-space position of this hex
     /// </summary>
@@ -143,6 +151,11 @@ public class Hex : IQPathTile
         return position;
     }
 
+    public static float CostEstimate(IQPathTile aa, IQPathTile bb)
+    {
+        return Distance((Hex)aa, (Hex)bb);
+    }
+
     public static float Distance(Hex a, Hex b)
     {
         // WARNING: PROBABLY WRONG for wrapping
@@ -195,18 +208,46 @@ public class Hex : IQPathTile
     public int BaseMovementCost()
     {
         //TODO: Factor in terrain type & features
-        return 1;
+        return MovementCost;
     }
+
+    Hex[] neighbours;
 
     #region IQPathTile implementation
     public IQPathTile[] GetNeighbours()
     {
-        throw new System.NotImplementedException();
+        if (this.neighbours != null)
+            return this.neighbours;        
+
+        List<Hex> neighbours = new List<Hex>();
+
+        neighbours.Add( NewHexTileMap.GetHexAt(Q + 1, R + 0));
+        neighbours.Add(NewHexTileMap.GetHexAt(Q + -1, R + 0));
+        neighbours.Add(NewHexTileMap.GetHexAt(Q + 0, R + +1));
+        neighbours.Add(NewHexTileMap.GetHexAt(Q + 0, R + -1));
+        neighbours.Add(NewHexTileMap.GetHexAt(Q + 1, R + -1));
+        neighbours.Add(NewHexTileMap.GetHexAt(Q + -1, R + +1));
+
+        List<Hex> neighbours2 = new List<Hex>();
+
+        foreach (Hex h in neighbours)
+        {
+            if (h != null)
+            {
+                neighbours2.Add(h);
+            }
+        }
+
+        this.neighbours = neighbours2.ToArray();
+
+        return this.neighbours;
+
     }
 
     public float AggregateCostToEnter(float costSoFar, IQPathTile sourceTile, IQPathUnit theUnit)
     {
-        throw new System.NotImplementedException();
+        //TODO: We are ignoring source tile right now, this will have to change when we have rivers...
+        return ((Unit)theUnit).AggregateTurnsToEnterHex(this, costSoFar);
     }
     #endregion
 }

@@ -21,6 +21,7 @@ public class Unit : IQPathUnit
     //TODO: This should probably be moved to some kind of central option/config file
     const bool MOVEMENT_RULES_LIKE_CIV6 = false;
 
+
     // **** SET THE UNIT ON A SPECIFIC HEX **** //
 
     public void SetHex (Hex newHex)
@@ -41,9 +42,24 @@ public class Unit : IQPathUnit
         }
     }
 
+    public void DUMMY_PATHING_FUNCTION()
+    {
+        Hex[] p = (Hex[])QPath.QPath.FindPath(
+            Hex.NewHexTileMap, 
+            this, 
+            Hex, 
+            Hex.NewHexTileMap.GetHexAt(Hex.Q +5, Hex.R), 
+            Hex.CostEstimate
+            );
+        Debug.Log("Got pathfinding path of length: " + p.Length);
+
+        SetHexPath(p);
+    }
+
     public void SetHexPath(Hex[] hexPath)
     {
         this.hexPath = new Queue<Hex>(hexPath);
+        this.hexPath.Dequeue(); // First hex is the one we're standing in, so throw it out. 
     }
 
     public void DoTurn()
@@ -76,7 +92,12 @@ public class Unit : IQPathUnit
         // than expected turn cost (Civ6)
 
         float baseTurnsToEnterHex = MovementCostToEnterHex(hex) / Movement; // Ex: Entering a forest is "1" turn.
-
+        if (baseTurnsToEnterHex < 0)
+        {
+            // Impassable terrain
+            Debug.Log("Impassable Terrain at: " + Hex.ToString());
+            return -99;
+        }
         if (baseTurnsToEnterHex > 1)
         {
             // Even if something costs 3 to enter and we have a max move of 2, you can always enter it using a full turn of movement. 
@@ -88,9 +109,9 @@ public class Unit : IQPathUnit
         float turnsToDateWhole = Mathf.Floor(turnsToDate); // Ex: 4.33 becomes 4
         float turnsToDateFraction = turnsToDate - turnsToDateWhole; // Ex: 4.33 becomes 0.33
 
-        if (turnsToDateFraction < 0.01 || turnsToDateFraction > 0.99)
+        if (turnsToDateFraction > 0 && turnsToDateFraction < 0.01f || turnsToDateFraction > 0.99)
         {
-            Debug.LogError("Looks like we've got floating-point drift.");
+            Debug.LogError("Looks like we've got floating-point drift." + turnsToDate);
             //TODO: Round things?
 
             if (turnsToDateFraction < 0.01f)
