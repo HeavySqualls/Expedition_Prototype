@@ -18,6 +18,8 @@ public class MouseController : MonoBehaviour
     delegate void UpdateFunc();
     UpdateFunc Update_CurrentFunc;
 
+    public LayerMask LayerID_HexTiles;
+
     void Start()
     {
         Update_CurrentFunc = Update_DetectModeStart;
@@ -46,17 +48,21 @@ public class MouseController : MonoBehaviour
         // Also do cleanup with any UI stuff associated with modes. 
     }
 
+    // ****** DEFAULT MOUSE MODE ******* //
 
     void Update_DetectModeStart()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("Mouse Button DOWN");
             // Left mouse button just went down.
             // This doesnt do anything by itself actually. 
         }
         else if (Input.GetMouseButtonUp(0))
         {
+            Debug.Log("Mouse button UP.... CLICK!");
             // TOD: Are we clicking on a hex with a unit? if so, select it. 
+            MouseToHex();
         }
         else if (Input.GetMouseButton(0) && Vector3.Distance(Input.mousePosition, LastMousePosition) > mouseDragThreshhold)
         {
@@ -72,6 +78,23 @@ public class MouseController : MonoBehaviour
         }
     }
 
+    // Take the mouse position, turn it into a ray, then use physics.raycast to return hit info
+    Hex MouseToHex()
+    {
+        Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hitInfo;
+
+        int layerMask = LayerID_HexTiles.value;
+
+        if (Physics.Raycast(mouseRay, out hitInfo, Mathf.Infinity, layerMask))
+        {
+            // Something got hit 
+            Debug.Log(hitInfo.collider.name);
+            return null;
+        }
+        Debug.Log("Found nothing");
+        return null;
+    }
 
     Vector3 MouseToGroundPlane(Vector3 mousePos)
     {
@@ -85,6 +108,7 @@ public class MouseController : MonoBehaviour
         return mouseRay.origin - (mouseRay.direction * rayLength);
     }
 
+
     void Update_UnitMovement()
     {
         if (Input.GetMouseButtonUp(1))
@@ -97,6 +121,7 @@ public class MouseController : MonoBehaviour
             return;
         }
     } 
+
 
     void Update_CameraDrag()
     {
