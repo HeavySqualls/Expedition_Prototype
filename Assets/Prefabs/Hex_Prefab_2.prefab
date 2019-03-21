@@ -156,7 +156,7 @@ TextMesh:
   m_GameObject: {fileID: 5725471752550457133}
   m_Text: 99, 99
   m_OffsetZ: 0
-  m_CharacterSize: 1
+  m_CharacterSize: 0.5
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 1
@@ -167,7 +167,7 @@ TextMesh:
   m_Font: {fileID: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4294901956
+    rgba: 4278195967
 --- !u!1001 &1574737499149921705
 PrefabInstance:
   m_ObjectHideFlags: 0

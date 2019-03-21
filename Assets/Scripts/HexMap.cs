@@ -173,6 +173,9 @@ public class HexMap : MonoBehaviour, IQPathWorld
                 hexToGOMap[h] = hexGO;
                 gOToHexMap[hexGO] = h;
 
+                h.TerrainType = Hex.TERRAIN_TYPE.OCEAN;
+                h.ElevationType = Hex.ELEVATION_TYPE.WATER;
+
                 hexGO.name = string.Format("HEX: {0},{1}", column, row);
                 hexGO.GetComponent<HexComponent>().Hex = h;
                 hexGO.GetComponent<HexComponent>().NEWHexTileMap = this;
@@ -199,27 +202,28 @@ public class HexMap : MonoBehaviour, IQPathWorld
                 MeshRenderer mr = hexGO.GetComponentInChildren<MeshRenderer>();
                 MeshFilter mf = hexGO.GetComponentInChildren<MeshFilter>();
 
-                h.MovementCost = 1;
-
                 // MOISTURE
                 if (h.Elevation >= HeightFlat && h.Elevation < HeightMountain)
                 {
                     if (h.Moisture >= MoistureJungle)
                     {
                         mr.material = MatGrassland;
+                        h.TerrainType = Hex.TERRAIN_TYPE.GRASSLANDS;
+                        h.FeatureType = Hex.FEATURE_TYPE.RAINFOREST;
 
-                        // TODO: Spawn Jungle
                         Vector3 p = hexGO.transform.position;
                         if (h.Elevation >= HeightHill)
                         {
                             p.y += 0.3f;
                         }
-                        h.MovementCost = 2;
+                       
                         GameObject.Instantiate(JunglePrefab, p, Quaternion.identity, hexGO.transform);
                     }
                     else if (h.Moisture >= MoistureForest)
                     {
                         mr.material = MatGrassland;
+                        h.TerrainType = Hex.TERRAIN_TYPE.GRASSLANDS;
+                        h.FeatureType = Hex.FEATURE_TYPE.FOREST;
 
                         // Spawn Forest
                         Vector3 p = hexGO.transform.position;
@@ -227,20 +231,23 @@ public class HexMap : MonoBehaviour, IQPathWorld
                         {
                             p.y += 0.3f;
                         }
-                        h.MovementCost = 2;
+                        
                         GameObject.Instantiate(ForestPrefab, p, Quaternion.identity, hexGO.transform);
                     }
                     else if (h.Moisture >= MoistureGrasslands)
                     {
                         mr.material = MatGrassland;
+                        h.TerrainType = Hex.TERRAIN_TYPE.GRASSLANDS;
                     }
                     else if (h.Moisture >= MoisturePlains)
                     {
                         mr.material = MatPlains;
+                        h.TerrainType = Hex.TERRAIN_TYPE.PLAINS;
                     }
                     else
                     {
                         mr.material = MatDesert;
+                        h.TerrainType = Hex.TERRAIN_TYPE.DESERT;
                     }
                 }
 
@@ -249,25 +256,25 @@ public class HexMap : MonoBehaviour, IQPathWorld
                 {
                     mr.material = MatMountain;
                     mf.mesh = MeshMountain;
-                    h.MovementCost = -99;
+                    h.ElevationType = Hex.ELEVATION_TYPE.MOUNTAIN;
                 }
                 else if (h.Elevation >= HeightHill)
                 {
                     mf.mesh = MeshHill;
-                    h.MovementCost = 2;
+                    h.ElevationType = Hex.ELEVATION_TYPE.HILL;
                 }
                 else if (h.Elevation >= HeightFlat)
                 {
                     mf.mesh = MeshFlat;
-                    h.MovementCost = 1.001f;
+                    h.ElevationType = Hex.ELEVATION_TYPE.FLAT;
                 }
                 else
                 {
                     mr.material = MatWater;
                     mf.mesh = MeshWater;
-                    h.MovementCost = -99;
+                    h.ElevationType = Hex.ELEVATION_TYPE.WATER;
                 }
-                hexGO.GetComponentInChildren<TextMesh>().text = string.Format("{0},{1}\n{2}", column, row, h.BaseMovementCost());
+                hexGO.GetComponentInChildren<TextMesh>().text = string.Format("{0},{1}\n{2}", column, row, h.BaseMovementCost(false, false, false));
 
             }
         }

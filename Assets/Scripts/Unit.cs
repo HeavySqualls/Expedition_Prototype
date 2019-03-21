@@ -102,8 +102,15 @@ public class Unit : IQPathUnit
 
     public float MovementCostToEnterHex(Hex hex)
     {
-        //TODO: Override base movement cost based on our movement mode + tile type. 
-        return hex.BaseMovementCost();
+        //TODO: Implement different movement traits 
+
+        // EXAMPLE: - potential way to call and override the base movement cost for a specific tile depending on the unit that is crossing it. 
+        //if (weAreAHillWalker && hex.ElevationType == Hex.ELEVATION_TYPE.HILL)
+        //{
+        //    return 1;
+        //}
+
+        return hex.BaseMovementCost(false, false, false);
     }
 
     public float AggregateTurnsToEnterHex(Hex hex, float turnsToDate)
