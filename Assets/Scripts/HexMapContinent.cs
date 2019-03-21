@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HexMapContinent : NEWHexTileMap
+public class HexMapContinent : HexMap
 {
     override public void GenerateMap()
     {    

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using QPath;
+using System;
 
-public class NEWHexTileMap : MonoBehaviour, IQPathWorld
+public class HexMap : MonoBehaviour, IQPathWorld
 {
     
     void Start()
@@ -77,9 +78,12 @@ public class NEWHexTileMap : MonoBehaviour, IQPathWorld
     [System.NonSerialized] public bool allowWrapEastWest = true;
     [System.NonSerialized] public bool allowWrapNorthSouth = false;
 
+    // Hex Dictionaries
     private Hex[,] hexes;
-    private Dictionary<Hex, GameObject> hexToGameObjectMap;
+    private Dictionary<Hex, GameObject> hexToGOMap;
+    private Dictionary<GameObject, Hex> gOToHexMap;
 
+    // Unit Dictionaries
     private HashSet<Unit> units;
     private Dictionary<Unit, GameObject> unitToGameObjectMap;
 
@@ -113,6 +117,26 @@ public class NEWHexTileMap : MonoBehaviour, IQPathWorld
         return hexes[x, y];
     }
 
+    public Hex GetHexFromGO(GameObject hexGO)
+    {
+        if (gOToHexMap.ContainsKey(hexGO))
+        {
+            return gOToHexMap[hexGO];
+        }
+
+        return null; 
+    }
+
+    public GameObject GetHexGO(Hex h)
+    {
+        if (hexToGOMap.ContainsKey(h))
+        {
+            return hexToGOMap[h];
+        }
+
+        return null;
+    }
+
     public Vector3 GetHexPosition(int q, int r)
     {
         Hex hex = GetHexAt(q, r);
@@ -128,8 +152,9 @@ public class NEWHexTileMap : MonoBehaviour, IQPathWorld
     public virtual void GenerateMap()
     {
         hexes = new Hex[numColumns, numRows];
-        hexToGameObjectMap = new Dictionary<Hex, GameObject>();
-        
+        hexToGOMap = new Dictionary<Hex, GameObject>();
+        gOToHexMap = new Dictionary<GameObject, Hex>();
+
         // Generate a map filled with ocean
         for (int column = 0; column < numColumns; column++)
         { 
@@ -145,7 +170,8 @@ public class NEWHexTileMap : MonoBehaviour, IQPathWorld
                 
                 GameObject hexGO = (GameObject)Instantiate(HexPrefab, pos, Quaternion.identity, this.transform);
 
-                hexToGameObjectMap[h] = hexGO;
+                hexToGOMap[h] = hexGO;
+                gOToHexMap[hexGO] = h;
 
                 hexGO.name = string.Format("HEX: {0},{1}", column, row);
                 hexGO.GetComponent<HexComponent>().Hex = h;
@@ -160,6 +186,7 @@ public class NEWHexTileMap : MonoBehaviour, IQPathWorld
         // StaticBatchingUtility.Combine(this.gameObject); FOR RENDERING ALL TILES AS STATIC FOR EFFICIENCY
     }
 
+
     public void UpdateHexVisuals()
     {
         for (int column = 0; column < numColumns; column++)
@@ -167,7 +194,7 @@ public class NEWHexTileMap : MonoBehaviour, IQPathWorld
             for (int row = 0; row < numRows; row++)
             {
                 Hex h = hexes[column, row];
-                GameObject hexGO = hexToGameObjectMap[h];
+                GameObject hexGO = hexToGOMap[h];
                 
                 MeshRenderer mr = hexGO.GetComponentInChildren<MeshRenderer>();
                 MeshFilter mf = hexGO.GetComponentInChildren<MeshFilter>();
@@ -270,7 +297,7 @@ public class NEWHexTileMap : MonoBehaviour, IQPathWorld
         }
 
         Hex myHex = GetHexAt(q, r);
-        GameObject myHexGO = hexToGameObjectMap[myHex];
+        GameObject myHexGO = hexToGOMap[myHex];
         unit.SetHex(myHex);
 
         GameObject unitGO = (GameObject)Instantiate(prefab, myHexGO.transform.position, Quaternion.identity, myHexGO.transform);

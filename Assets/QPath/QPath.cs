@@ -16,9 +16,6 @@ namespace QPath
     ///     1)  List of neighbours
     ///     2)  The aggregate cost to enter this tile from another tile
     /// 
-    /// 
-    /// 
-    /// 
     /// </summary>
 
 

@@ -16,6 +16,10 @@ public class Unit : IQPathUnit
     public delegate void UnitMovedDelegate(Hex oldHex, Hex newHex);
     public event UnitMovedDelegate OnUnitMoved;
 
+    /// <summary>
+    /// List of hexes to walk through (from pathfinder). 
+    /// NOTE: First item is always the hex we are standing in. 
+    /// </summary>
     Queue<Hex> hexPath;
 
     //TODO: This should probably be moved to some kind of central option/config file
@@ -61,17 +65,19 @@ public class Unit : IQPathUnit
         this.hexPath = new Queue<Hex>();
     }
 
+    public Hex[] GetHexPath()
+    {
+        return (hexPath == null) ? null : hexPath.ToArray();
+    }
+
     public void SetHexPath(Hex[] hexArray)
     {
         this.hexPath = new Queue<Hex>(hexArray);
-
-        if (hexPath.Count > 0)
-            this.hexPath.Dequeue(); // First hex is the one we're standing in, so throw it out. 
     }
 
     public void DoTurn()
     {
-        Debug.Log("DoTurn");
+        Debug.Log("Do Action");
         // do queued move?
 
         if (hexPath == null || hexPath.Count == 0)
@@ -80,7 +86,15 @@ public class Unit : IQPathUnit
         }
 
         // Grab the first hex from our queue
-        Hex newHex = hexPath.Dequeue(); // First in, first out
+        /*Hex actualCurrentHex =*/ hexPath.Dequeue();
+        Hex newHex = hexPath.Peek();
+
+        if (hexPath.Count == 1)
+        {
+            // The only hex left in the list is the one we are moving to now, therefore we
+            // have no more path to follow, so we clear the queue completely to avoid confusion. 
+            hexPath = null;
+        }
 
         // Move to the new Hex 
         SetHex(newHex);
@@ -101,8 +115,7 @@ public class Unit : IQPathUnit
         float baseTurnsToEnterHex = MovementCostToEnterHex(hex) / Movement; // Ex: Entering a forest is "1" turn.
         if (baseTurnsToEnterHex < 0)
         {
-            // Impassable terrain
-            Debug.Log("Impassable Terrain at: " + hex.ToString());
+            //Debug.Log("Impassable Terrain at: " + hex.ToString());
             return -99;
         }
         if (baseTurnsToEnterHex > 1)

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4489360924787435452}
   - component: {fileID: 8886356225156442826}
+  - component: {fileID: 2391527315724080692}
   m_Layer: 8
   m_Name: Hex_Prefab_2
   m_TagString: Untagged
@@ -46,13 +47,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NEWHexTileMap: {fileID: 0}
---- !u!54 &950740512035131480
+--- !u!54 &2391527315724080692
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574737499149888265}
+  m_GameObject: {fileID: 1454024110344362162}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0

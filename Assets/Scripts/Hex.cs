@@ -14,7 +14,7 @@ using QPath;
 
 public class Hex : IQPathTile
 {
-    public Hex(NEWHexTileMap newHexTileMap, int q, int r)
+    public Hex(HexMap newHexTileMap, int q, int r)
     {
         this.NewHexTileMap = newHexTileMap;
          
@@ -40,7 +40,7 @@ public class Hex : IQPathTile
     //TODO: Need some kind of property to track hex type (plains, grasslands, etc.....)
     //TODO: Need property to track hex details (forest, mine, farm...)
 
-    public readonly NEWHexTileMap NewHexTileMap;
+    public readonly HexMap NewHexTileMap;
     
     static readonly float WIDTH_MULTIPLIER = Mathf.Sqrt(2.992f) / 2; // <--------------------- HEX HORIZONTAL SPACING VARIABLE!!
 
