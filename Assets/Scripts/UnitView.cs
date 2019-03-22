@@ -24,6 +24,7 @@ public class UnitView : MonoBehaviour
         newPosition = newHex.PositionFromCamera();
         currentVelocity = Vector3.zero;
 
+        // TELEPORT INSTRUCTION
         if (Vector3.Distance(this.transform.position, newPosition) > 10) // (why do I need to be at 10 to move with lerp with this??)
         {
             // This OnUnitMoved is considerably more than the expected move between two adjacent tiles. 
@@ -32,10 +33,20 @@ public class UnitView : MonoBehaviour
             this.transform.position = newPosition;
 
         }
+        else
+        {
+            // TODO: We NEED a better way of signalling system and/or animation queueing...
+            GameObject.FindObjectOfType<HexMap>().AnimationIsPlaying = true;
+        }
     }
 
     void Update()
     {
         this.transform.position = Vector3.SmoothDamp(this.transform.position, newPosition, ref currentVelocity, smoothTime);
+
+        //TODO: Figure out the best way to determine the end of our animation
+        if(Vector3.Distance(this.transform.position, newPosition) < 0.1f)
+            GameObject.FindObjectOfType<HexMap>().AnimationIsPlaying = false;
+
     }
 }

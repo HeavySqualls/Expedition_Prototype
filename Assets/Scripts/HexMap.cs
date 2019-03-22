@@ -12,18 +12,15 @@ public class HexMap : MonoBehaviour, IQPathWorld
         GenerateMap();
     }
 
+    public bool AnimationIsPlaying = false;
+
     void Update()
     {
+        // TODO: look into moving these commands to a different keyboard controller script in the future...
         // TESTING: Hit spacebar to advance to next turn
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (units != null)
-            {
-                foreach (Unit u in units)
-                {
-                    u.DoMove();
-                }
-            }
+            StartCoroutine(DoAllUnitMoves());
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -34,7 +31,49 @@ public class HexMap : MonoBehaviour, IQPathWorld
                     u.DUMMY_PATHING_FUNCTION();
                 }
             }
+        } // <-----------OLD PATH TESTING FUNCTION (keeping for refrence)
+    }
+
+    IEnumerator DoAllUnitMoves() // does the coroutine for every unit that does the waiting between animations
+    {
+        if (units != null)
+        {
+            foreach (Unit u in units)
+            {
+                yield return DoUnitMoves(u);
+            }
         }
+    }
+
+    public IEnumerator DoUnitMoves (Unit u)
+    {
+        // Is there any reason we should check HERE if a unit should be moving?
+        // I think the answer is no --- DoMove should just check to see if it needs to do anything, or just return immediately. 
+        while (u.DoMove())
+        {
+            Debug.Log("DoMove returned true---will be called again.");
+            //TODO: Check to see if an animation is playing, if so wait for it to finish. (Coroutine)
+            while (AnimationIsPlaying)
+            {
+                yield return null; // Wait one frame
+            }
+        }
+    }
+
+    public void EndTurn()
+    {
+        // First check to see if there are any units that have enqueued moves. 
+            // Do those moves
+        // Now are any units waiting for orders? If so, half and EndTurn()
+
+        // Heal units that are resting
+
+        // Reset unit movements
+        foreach(Unit u in units)
+        {
+            u.RefreshMovement();
+        }
+        //
     }
     
 //-------- VARIABLES ---------//     
@@ -84,6 +123,7 @@ public class HexMap : MonoBehaviour, IQPathWorld
     private Dictionary<GameObject, Hex> gOToHexMap;
 
     // Unit Dictionaries
+    //TODO: Create separate unit lists for each player
     private HashSet<Unit> units;
     private Dictionary<Unit, GameObject> unitToGameObjectMap;
 
@@ -117,6 +157,7 @@ public class HexMap : MonoBehaviour, IQPathWorld
         return hexes[x, y];
     }
 
+
     public Hex GetHexFromGO(GameObject hexGO)
     {
         if (gOToHexMap.ContainsKey(hexGO))
@@ -148,6 +189,7 @@ public class HexMap : MonoBehaviour, IQPathWorld
     {
         return hex.PositionFromCamera(Camera.main.transform.position, numRows, numColumns);
     }
+
 
     public virtual void GenerateMap()
     {
