@@ -16,9 +16,21 @@ public class MouseController : MonoBehaviour
     Vector3 cameraTargetOffset;
 
     // Unit movement
+    Unit __selectedUnit = null; // dont use this directly 
+    public Unit SelectedUnit
+    {
+        get { return __selectedUnit; }
+        set {
+            __selectedUnit = value;            
+            UnitSelectionPanel.SetActive(__selectedUnit != null); // if selected unit is NOT null, UnitSelectionPanel is set to active
+            }
+    }
+
     LineRenderer lineRenderer;
-    Unit selectedUnit = null;
     Hex[] hexPath;
+
+    //UI Controls
+    public GameObject UnitSelectionPanel;
 
     delegate void UpdateFunc();
     UpdateFunc Update_CurrentFunc;
@@ -33,6 +45,8 @@ public class MouseController : MonoBehaviour
         hexMap = GameObject.FindObjectOfType<HexMap>();
 
         lineRenderer = transform.GetComponentInChildren<LineRenderer>();
+
+        
     }
 
 
@@ -40,8 +54,9 @@ public class MouseController : MonoBehaviour
     {
         hexUnderMouse = MouseToHex(); 
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
+            SelectedUnit = null;
             CancelUpdateFunc();
         }
 
@@ -53,9 +68,9 @@ public class MouseController : MonoBehaviour
 
         hexLastUnderMouse = hexUnderMouse;
 
-        if (selectedUnit != null)
+        if (SelectedUnit != null)
         {
-            DrawPath((hexPath != null) ? hexPath : selectedUnit.GetHexPath());
+            DrawPath((hexPath != null) ? hexPath : SelectedUnit.GetHexPath());
         }
         else
         {
@@ -91,7 +106,6 @@ public class MouseController : MonoBehaviour
         Update_CurrentFunc = Update_DetectModeStart;
 
         // Also do cleanup with any UI stuff associated with modes. 
-        selectedUnit = null;
 
         hexPath = null;
     }
@@ -115,13 +129,13 @@ public class MouseController : MonoBehaviour
 
             if (us.Length > 0 )
             {
-                selectedUnit = us[0];
+                SelectedUnit = us[0];
                 // Update_CurrentFunc = Update_UnitMovement;
 
                 // NOTE: Selecting a unit does NOT change mouse mode.
             }
         }
-        else if (selectedUnit != null && Input.GetMouseButtonDown(1))
+        else if (SelectedUnit != null && Input.GetMouseButtonDown(1))
         {
             Update_CurrentFunc = Update_UnitMovement;
         }
@@ -131,7 +145,7 @@ public class MouseController : MonoBehaviour
             lastMouseGroundPlanePosition = MouseToGroundPlane(Input.mousePosition);
             Update_CurrentFunc();
         }
-        else if (selectedUnit != null && Input.GetMouseButton(1))
+        else if (SelectedUnit != null && Input.GetMouseButton(1))
         {
             // we have a selected unit and we are holding down the mouse button. 
             // We are in unit movement mode, show a path from unit to mouse position via the pathfinding system. 
@@ -172,13 +186,13 @@ public class MouseController : MonoBehaviour
 
     void Update_UnitMovement()
     {
-        if (Input.GetMouseButtonUp(1) || selectedUnit == null)
+        if (Input.GetMouseButtonUp(1) || SelectedUnit == null)
         {
             Debug.Log("Complete unit movement.");
 
-            if (selectedUnit != null)
+            if (SelectedUnit != null)
             {
-                selectedUnit.SetHexPath(hexPath);
+                SelectedUnit.SetHexPath(hexPath);
             }
 
             CancelUpdateFunc();
@@ -191,7 +205,7 @@ public class MouseController : MonoBehaviour
         if (hexPath == null || hexUnderMouse != hexLastUnderMouse)
         {
             // Do a pathfinding search to that hex
-            hexPath = QPath.QPath.FindPath<Hex>(hexMap, selectedUnit, selectedUnit.Hex, hexUnderMouse, Hex.CostEstimate);
+            hexPath = QPath.QPath.FindPath<Hex>(hexMap, SelectedUnit, SelectedUnit.Hex, hexUnderMouse, Hex.CostEstimate);
         }
     } 
 

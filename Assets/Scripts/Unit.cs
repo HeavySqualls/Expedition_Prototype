@@ -5,7 +5,7 @@ using QPath;
 
 public class Unit : IQPathUnit
 {
-    public string Name = "Unnamed";
+    public string Name = "Bill Flanagan";
     public int HitPoints = 10;
     public int Strength = 8;
     public int Movement = 2;
@@ -75,7 +75,7 @@ public class Unit : IQPathUnit
         this.hexPath = new Queue<Hex>(hexArray);
     }
 
-    public void DoTurn()
+    public void DoMove()
     {
         Debug.Log("Do Action");
         // do queued move?

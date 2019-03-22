@@ -21,6 +21,8 @@ public class Hex : IQPathTile
         this.Q = q;
         this.R = r;
         this.S = -(q + r);
+
+        units = new HashSet<Unit>();
     }
     
     // Q + R + S = 0
@@ -221,10 +223,10 @@ public class Hex : IQPathTile
         if ((ElevationType == ELEVATION_TYPE.MOUNTAIN || ElevationType == ELEVATION_TYPE.WATER) && isFlyer == false)
             return -99;
 
-        float moveCost = 1.01f;
+        float moveCost = 1.0f;
 
         if (ElevationType == ELEVATION_TYPE.HILL && isHillWalker == false)
-            moveCost += 1;
+            moveCost += 1.5f;
 
         if ((FeatureType == FEATURE_TYPE.FOREST || FeatureType == FEATURE_TYPE.RAINFOREST) && isForestWalker == false)
             moveCost += 2;
