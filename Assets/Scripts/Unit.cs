@@ -9,9 +9,11 @@ public class Unit : IQPathUnit
     public int HitPoints = 10;
     public int Strength = 8;
     public int Movement = 10;
+    public int numOfTurns = 1;
     public float MovementRemaining = 10f;
 
     public Hex Hex { get; protected set; }
+
 
     public delegate void UnitMovedDelegate(Hex oldHex, Hex newHex);
     public event UnitMovedDelegate OnUnitMoved;
@@ -23,7 +25,7 @@ public class Unit : IQPathUnit
     List<Hex> hexPath;
 
     //TODO: This should probably be moved to some kind of central option/config file
-    const bool MOVEMENT_RULES_LIKE_CIV6 = false;
+    const bool MOVEMENT_RULES_LIKE_CIV6 = true;
 
 
     // **** SET THE UNIT ON A SPECIFIC HEX **** //
@@ -49,10 +51,10 @@ public class Unit : IQPathUnit
     public void DUMMY_PATHING_FUNCTION()
     {
         Hex[] p = (Hex[])QPath.QPath.FindPath<Hex>(
-            Hex.NewHexTileMap, 
-            this, 
-            Hex, 
-            Hex.NewHexTileMap.GetHexAt(Hex.Q +5, Hex.R), 
+            Hex.NewHexTileMap,
+            this,
+            Hex,
+            Hex.NewHexTileMap.GetHexAt(Hex.Q + 5, Hex.R),
             Hex.CostEstimate
             );
         Debug.Log("Got pathfinding path of length: " + p.Length);
@@ -87,6 +89,7 @@ public class Unit : IQPathUnit
 
     public void RefreshMovement() // refill unit movements
     {
+        numOfTurns++;
         MovementRemaining = Movement;
     }
 

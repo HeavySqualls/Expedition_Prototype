@@ -16,13 +16,18 @@ public class MouseController : MonoBehaviour
     Vector3 cameraTargetOffset;
 
     // Unit movement
+    public GameObject selectedObject;
+    //public SelectionShader selectionShader;
+
     Unit __selectedUnit = null; // dont use this directly 
     public Unit SelectedUnit
     {
         get { return __selectedUnit; }
         set {
-            __selectedUnit = value;            
-            UnitSelectionPanel.SetActive(__selectedUnit != null); // if selected unit is NOT null, UnitSelectionPanel is set to active
+            __selectedUnit = value;
+
+            UnitSelectionPanel.SetActive(__selectedUnit != null);
+            //selectionShader.Shader.SetFloat("_SecondOutlineWidth", 0.04f);// if selected unit is NOT null, UnitSelectionPanel is set to active
             }
     }
 
@@ -130,7 +135,7 @@ public class MouseController : MonoBehaviour
             if (us.Length > 0 )
             {
                 SelectedUnit = us[0];
-                // Update_CurrentFunc = Update_UnitMovement;
+                
 
                 // NOTE: Selecting a unit does NOT change mouse mode.
             }
@@ -161,10 +166,12 @@ public class MouseController : MonoBehaviour
 
         if (Physics.Raycast(mouseRay, out hitInfo, Mathf.Infinity, layerMask))
         {
-            //Debug.Log(hitInfo.collider.name); // the collider is a child of the "correct" gameObject that we want.
+            Debug.Log(hitInfo.collider.name); // the collider is a child of the "correct" gameObject that we want.
 
             GameObject hexGO = hitInfo.rigidbody.gameObject;
+            //GameObject hitObject = hitInfo.transform.root.gameObject;
 
+            //selectedObject(hitObject);
             return hexMap.GetHexFromGO(hexGO);
         }
         Debug.Log("Found nothing");

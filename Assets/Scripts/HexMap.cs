@@ -17,7 +17,7 @@ public class HexMap : MonoBehaviour, IQPathWorld
     void Update()
     {
         // TODO: look into moving these commands to a different keyboard controller script in the future...
-        // TESTING: Hit spacebar to advance to next turn
+        // TESTING: Hit spacebar continue movement from previous turn
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(DoAllUnitMoves());
@@ -31,7 +31,7 @@ public class HexMap : MonoBehaviour, IQPathWorld
                     u.DUMMY_PATHING_FUNCTION();
                 }
             }
-        } // <-----------OLD PATH TESTING FUNCTION (keeping for refrence)
+        }
     }
 
     IEnumerator DoAllUnitMoves() // does the coroutine for every unit that does the waiting between animations
@@ -47,13 +47,10 @@ public class HexMap : MonoBehaviour, IQPathWorld
 
     public IEnumerator DoUnitMoves (Unit u)
     {
-        // Is there any reason we should check HERE if a unit should be moving?
-        // I think the answer is no --- DoMove should just check to see if it needs to do anything, or just return immediately. 
         while (u.DoMove())
         {
             Debug.Log("DoMove returned true---will be called again.");
-            //TODO: Check to see if an animation is playing, if so wait for it to finish. (Coroutine)
-            while (AnimationIsPlaying)
+            while (AnimationIsPlaying) // While the animation is playing, the next move is paused. 
             {
                 yield return null; // Wait one frame
             }
