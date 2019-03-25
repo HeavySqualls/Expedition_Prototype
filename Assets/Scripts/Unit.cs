@@ -6,10 +6,10 @@ using QPath;
 public class Unit : IQPathUnit
 {
     public string Name = "Bill Flanagan";
-    public int HitPoints = 10;
-    public int Strength = 8;
-    public int Movement = 10;
-    public int numOfTurns = 1;
+    public int Health = 10;
+    public int Energy = 10;
+    public int Hunger = 2;
+    public int numOfDays = 1;
     public float MovementRemaining = 10f;
 
     public Hex Hex { get; protected set; }
@@ -89,8 +89,8 @@ public class Unit : IQPathUnit
 
     public void RefreshMovement() // refill unit movements
     {
-        numOfTurns++;
-        MovementRemaining = Movement;
+        numOfDays++;
+        MovementRemaining = Energy;
     }
 
     /// <summary>
@@ -121,7 +121,7 @@ public class Unit : IQPathUnit
         float costToEnter = MovementCostToEnterHex(newHex);
 
         // Check if we have enough moves to complete the movement
-        if(costToEnter > MovementRemaining && MovementRemaining < Movement && MOVEMENT_RULES_LIKE_CIV6)
+        if(costToEnter > MovementRemaining && MovementRemaining < Energy && MOVEMENT_RULES_LIKE_CIV6)
         {
             // We can't enter the hex this turn
             hexPath.Insert(0, hexWeAreLeaving);
@@ -166,7 +166,7 @@ public class Unit : IQPathUnit
         // remaining movement points, this will eiter result in a cheaper-than expected turn cost (Civ5) or a more expensive
         // than expected turn cost (Civ6)
 
-        float baseTurnsToEnterHex = MovementCostToEnterHex(hex) / Movement; // Ex: Entering a forest is "1" turn.
+        float baseTurnsToEnterHex = MovementCostToEnterHex(hex) / Energy; // Ex: Entering a forest is "1" turn.
         if (baseTurnsToEnterHex < 0)
         {
             //Debug.Log("Impassable Terrain at: " + hex.ToString());
@@ -178,7 +178,7 @@ public class Unit : IQPathUnit
             baseTurnsToEnterHex = 1;
         }
 
-        float turnsRemaining = MovementRemaining / Movement; // Ex: If we are at 1/2 move, then we have .5 turns left.
+        float turnsRemaining = MovementRemaining / Energy; // Ex: If we are at 1/2 move, then we have .5 turns left.
 
         float turnsToDateWhole = Mathf.Floor(turnsToDate); // Ex: 4.33 becomes 4
         float turnsToDateFraction = turnsToDate - turnsToDateWhole; // Ex: 4.33 becomes 0.33
